@@ -1,0 +1,30 @@
+{
+  "name": "back-end-candidate-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run serve",
+    "build": "npm run build-ts && npm run tslint",
+    "build-ts": "tsc",
+    "serve": "node dist/server.js",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tagarela/back-end-candidate-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tagarela/back-end-candidate-test/issues"
+  },
+  "homepage": "https://github.com/Tagarela/back-end-candidate-test#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "ts-node": "^8.10.1",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.3"
+  }
+}
