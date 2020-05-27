@@ -21,8 +21,15 @@
     "url": "https://github.com/Tagarela/back-end-candidate-test/issues"
   },
   "homepage": "https://github.com/Tagarela/back-end-candidate-test#readme",
-  "dependencies": {},
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "minio": "^7.0.16"
+  },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.6",
+    "@types/minio": "^7.0.5",
     "ts-node": "^8.10.1",
     "tslint": "^6.1.2",
     "typescript": "^3.9.3"
