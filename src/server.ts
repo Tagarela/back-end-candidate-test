@@ -15,10 +15,6 @@ app.listen(app.get("port"), () => {
     process.on("uncaughtException", (exception) => {
         process.exit(1);
     });
-});
 
-// import {MinIoService} from "./services/storage/MinIOService";
-//
-// const minioService = new MinIoService();
-// minioService.init();
-// // console.log(minioService);
+    console.log(`  App is running at http://localhost:${process.env.PORT} in ${process.env.NODE_ENV} mode`);
+});
