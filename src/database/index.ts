@@ -1,6 +1,5 @@
 import { DataObj } from "database";
-
-const data = require("../fixtures/fixtures.json");
+import data from "../fixtures/fixtures";
 
 /**
  * Database example class

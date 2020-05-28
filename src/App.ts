@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import { ApolloServer } from 'apollo-server-express';
-import schema from '../src/components/graphQL/schema/index';
+import schema from './components/graphQL/schema/index';
 import compression from "compression";
 import bodyParser from "body-parser";
 
