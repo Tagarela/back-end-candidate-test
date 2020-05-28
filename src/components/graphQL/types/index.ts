@@ -37,6 +37,14 @@ const typeDefs = gql`
         users: [User]
         user(id: String!): User
     }
+    
+    type Mutation {
+        saveToTheFile(filename: String, data: String): FileData
+    }
+            
+    type FileData {
+        url: String
+    }
 `;
 
 export default typeDefs;

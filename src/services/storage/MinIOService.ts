@@ -1,5 +1,6 @@
 import { Client } from "minio";
 import dotenv from "dotenv";
+
 dotenv.config();
 
 /**
@@ -38,8 +39,73 @@ export class MinIoService {
      *
      * @param data
      */
-    public async saveFile(data: Buffer): Promise<boolean> {
+    public async saveFile(fileName: string, data: string): Promise<boolean> {
+        await this.client.putObject(this.bucketName, fileName, data);
 
         return true;
+    }
+
+    /**
+     * Get Data from file
+     *
+     * @param fileName
+     */
+    public async getDataFromFile(fileName: string): Promise<string> {
+        const isFileExist = await this.checkFileExist(fileName);
+        if (!isFileExist) {
+            return '';
+        }
+        const fileDataStream = await this.client.getObject(this.bucketName, fileName);
+
+        return new Promise((resolve, reject) => {
+            let data = "";
+            fileDataStream.on("data", chunk => data += chunk);
+            fileDataStream.on("end", () => resolve(data));
+            fileDataStream.on("error", error => reject(error));
+        });
+    }
+
+    /**
+     * Add data to the file
+     *
+     * @param string fileName
+     * @param string data
+     *
+     */
+    public async saveDataToTheFile(fileName: string, data: string): Promise<void> {
+        let fileData: string = await this.getDataFromFile(fileName);
+        fileData = fileData + data;
+        await this.saveFile(fileName, fileData);
+    }
+
+    /**
+     * Check is file exist in the storage
+     *
+     * @param string fileName
+     */
+    public async checkFileExist(fileName: string): Promise<boolean> {
+        try {
+            await this.client.statObject(this.bucketName, fileName);
+            return true;
+        } catch (e) {
+            if (e.code == "NotFound") {
+                return false;
+            } else {
+                throw e;
+            }
+        }
+    }
+
+    /**
+     * Get persist file link
+     *
+     * @param fileName
+     */
+    public async getFileLink(fileName: string): Promise<string|boolean> {
+        const isFileExist = await this.checkFileExist(fileName);
+        if (!isFileExist) {
+           return false;
+        }
+        return await this.client.presignedGetObject(this.bucketName, fileName);
     }
 }

@@ -18,3 +18,11 @@ app.listen(app.get("port"), () => {
 
     console.log(`  App is running at http://localhost:${process.env.PORT} in ${process.env.NODE_ENV} mode`);
 });
+
+// import {MinIoService} from "./services/storage/MinIOService";
+//
+// (async () => {
+//     const minio = new MinIoService();
+//     const url = await minio.getFileLink('test.txt');
+//     console.log(url);
+// })();

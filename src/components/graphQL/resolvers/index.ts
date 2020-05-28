@@ -2,6 +2,7 @@ import { UserQueries } from './user';
 import { ProductQueries } from './product';
 import { ProgramQueries } from './program';
 import { TransactionQueries } from './transaction';
+import { FileMutation } from './file';
 
 const rootResolver = {
     Query: {
@@ -10,9 +11,9 @@ const rootResolver = {
         ...ProgramQueries,
         ...TransactionQueries
     },
-    // Mutation: {
-    //
-    // },
+    Mutation: {
+        ...FileMutation
+    },
     // Subscription: {
     //
     // }
