@@ -5,9 +5,9 @@ services:
       context: ./
       dockerfile: ./docker/back-end-candidate-test/Dockerfile
     ports:
-      - 8080:8080
+      - '3001:3001'
     environment:
-      PORT: 8080
+      PORT: 3001
       MINIO_STORAGE_PORT: 9000
       MINIO_STORAGE_ACESS_KEY: minio
       MINIO_STORAGE_SECRET_KEY: minio123
@@ -25,3 +25,15 @@ services:
     environment:
       - MINIO_ACCESS_KEY=minio
       - MINIO_SECRET_KEY=minio123
+
+  client:
+    build:
+      context: ./
+      dockerfile: ./docker/client/Dockerfile
+    stdin_open: true
+    ports:
+      - '3000:3000'
+    links:
+      - back-end-candidate-test
+    depends_on:
+      - back-end-candidate-test

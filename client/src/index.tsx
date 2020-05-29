@@ -5,12 +5,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
-
-console.log('!!!!!!!!!!!!!!!');
-console.log(process.env["SERVER_HOST"]);
-console.log('!!!!!!!!!!!!!!!');
 const client = new ApolloClient({
-    uri: 'http://localhost:8080/graphql'
+    uri: 'http://' + process.env['REACT_APP_SERVER_HOST'] + ':' + process.env['REACT_APP_SERVER_PORT'] + '/' +
+        process.env['REACT_APP_SERVER_GRAPHQL_ENDPOINT']
 })
 ReactDOM.render(
   <React.StrictMode>
