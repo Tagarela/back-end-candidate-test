@@ -45,7 +45,63 @@ Install client dependencies
 ```
 *Note: Root project folder must be cwd (current working directory) to resolve configuration files correctly. You cannot launch application from `dist` folder`.*
 
+#### Request
+Save data to the file
+```sh
+mutation {
+  saveToTheFile(filename: "files.txt", data: "777") {
+    url
+  }
+}
+```
+*Note: api create file or add info to existing one
+url - url to the file in storage 
 
+Get product
+```sh
+ {
+    products {
+        id
+        program_id
+        start
+        end
+        price
+    }
+  }
+```
+
+Get users
+```sh
+{
+    users {
+      id
+      name
+      created
+    }
+  }
+```
+
+ Get programs
+```sh
+   {
+     programs {
+       id
+       title
+     }
+   }
+```
+
+Get transactions
+```sh
+  {
+    transactions {
+      id
+      timestamp
+      product_id
+      user_id
+    }
+  }
+```
 [typescript]: <https://www.typescriptlang.org/>
 [docker]: <https://docs.docker.com//>
 
