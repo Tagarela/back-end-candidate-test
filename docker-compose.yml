@@ -1,0 +1,39 @@
+version: '3.4'
+services:
+  back-end-candidate-test:
+    build:
+      context: ./
+      dockerfile: ./docker/back-end-candidate-test/Dockerfile
+    ports:
+      - '3001:3001'
+    environment:
+      PORT: 3001
+      MINIO_STORAGE_PORT: 9000
+      MINIO_STORAGE_ACESS_KEY: minio
+      MINIO_STORAGE_SECRET_KEY: minio123
+      MINIO_STORAGE_HOST: minio
+      MINIO_STORAGE_BUCKET: minio-bucket
+    links:
+      - minio
+    depends_on:
+      - minio
+
+  minio:
+    image: 'bitnami/minio:latest'
+    ports:
+      - '9000:9000'
+    environment:
+      - MINIO_ACCESS_KEY=minio
+      - MINIO_SECRET_KEY=minio123
+
+  client:
+    build:
+      context: ./
+      dockerfile: ./docker/client/Dockerfile
+    stdin_open: true
+    ports:
+      - '3000:3000'
+    links:
+      - back-end-candidate-test
+    depends_on:
+      - back-end-candidate-test
